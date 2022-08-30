@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/app.css">
+    </link>
+</head>
+
+<body>
+
+    <button onclick="addName()">Add Name</button>
+    <table id="nameData">
+        <thead>
+            <th>Name</th>
+            <th>Action</th>
+        </thead>
+    </table>
+    <script>
+        var id = 0;
+        function getData(tagId) {
+            var information = document.getElementById(tagId);
+            return information.innerText;
+        }
+
+        function viewData(id) {
+            alert(getData(id));
+        }
+
+        function addName() {
+            var name = prompt("please enter a name?");
+            if (name !== '' && name != null) {
+                id++;
+                addDataToTable(name, id);
+            }
+        }
+        
+        function addDataToTable(name, recordId) {
+            var table = document.getElementById('nameData');
+            var tableRow = document.createElement('tr');
+            var recordData = document.createElement('td');
+            recordData.id = id;
+            recordData.innerHTML = name;
+            tableRow.appendChild(recordData);
+            var recordAction = document.createElement('td');
+            var button = document.createElement('button');
+            button.innerText = 'View Data';
+            button.addEventListener('click', function handleClick(event) {
+                viewData(recordId);
+            });
+            recordAction.appendChild(button);
+            tableRow.appendChild(recordAction);
+            table.appendChild(tableRow);
+        }
+    </script>
+</body>
+
+
+</html>
